@@ -9,8 +9,8 @@ mushrooms.data <- mushrooms.table[, -1];
 set.seed(123);
 mushrooms.size <- nrow(mushrooms.table);
 mushrooms.train_index <- sample(seq_len(mushrooms.size), size = floor(0.75 * mushrooms.size));
-mushrooms.training <- mushrooms.table[mushrooms.train_index,]
-mushrooms.test <- mushrooms.table[ - mushrooms.train_index,]
+mushrooms.training <- mushrooms.table[mushrooms.train_index,];
+mushrooms.test <- mushrooms.table[ - mushrooms.train_index,];
 
 # Other Configuration ---
 options(max.print = 230);
