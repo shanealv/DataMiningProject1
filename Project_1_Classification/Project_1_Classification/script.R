@@ -1,7 +1,13 @@
 # source("script.R")
 # Load Libraries ---
-install.packages("party", lib = "lib")
-library("party", lib.loc = "lib")
+usePackage <- function(p) {
+    if (!is.element(p, installed.packages()[, 1]))
+        install.packages(p, dep = TRUE, lib = "lib")
+    library(p, lib.loc = "lib")
+}
+usePackage("party");
+#install.packages("party", lib = "lib")
+#library("party", lib.loc = "lib")
 
 # Load Data Sets ---
 mushrooms.table <- read.table("Data/agaricus-lepiota.data", sep = ",");
@@ -17,6 +23,6 @@ mushrooms.testing <- mushrooms.table[ - mushrooms.train_index,];
 # Other Configuration ---
 options(max.print = 230);
 
-# Rpart on Mushroom Data ---
-mushrooms.tree <- ctree(Class ~ CS + CC + B + O + GA + GSp + GSi + GC + SS + SR + SSuAR + SSuBr + SCAR + SCBR + VT + VC + RN + RT + SPC + P + H, data = mushrooms.table);
+# Create tree for Mushroom Data ---
+mushrooms.tree <- ctree(Class ~ CS + CC + B + O + GA + GSp + GSi + GC + SS + SR + SSuAR + SSuBr + SCAR + SCBR + VT + VC + RN + RT + SPC + P + H, data = mushrooms.training);
 plot(mushrooms.tree);
