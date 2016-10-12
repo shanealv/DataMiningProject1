@@ -2,27 +2,38 @@
 # Load Libraries ---
 usePackage <- function(p) {
     if (!is.element(p, installed.packages()[, 1]))
-        install.packages(p, dep = TRUE, lib = "lib")
-    library(p, lib.loc = "lib")
+        install.packages(p)
+    library(p, character.only = TRUE)
 }
-usePackage("party");
-#install.packages("party", lib = "lib")
-#library("party", lib.loc = "lib")
+usePackage("tree");
 
 # Load Data Sets ---
-mushrooms.table <- read.table("Data/agaricus-lepiota.data", sep = ",");
-names(mushrooms.table) <- c("Class", "CS", "CC", "B", "O", "GA", "GSp", "GSi", "GC", "SS", "SR", "SSuAR", "SSuBr", "SCAR", "SCBR", "VT", "VC", "RN", "RT", "SPC", "P", "H");
-mushrooms.classlabel <- mushrooms.table[, 1];
-mushrooms.data <- mushrooms.table[, -1];
+mushrooms <- read.table("Data/agaricus-lepiota.data", sep = ",");
+names(mushrooms) <- c("Class", "CS", "CC", "B", "O", "GA", "GSp", "GSi", "GC", "SS", "SR", "SSuAR", "SSuBr", "SCAR", "SCBR", "VT", "VC", "RN", "RT", "SPC", "P", "H");
+mushrooms.class <- mushrooms[[1]]
 set.seed(123);
-mushrooms.size <- nrow(mushrooms.table);
-mushrooms.train_index <- sample(seq_len(mushrooms.size), size = floor(0.75 * mushrooms.size));
-mushrooms.training <- mushrooms.table[mushrooms.train_index,];
-mushrooms.testing <- mushrooms.table[ - mushrooms.train_index,];
+mushrooms.size <- nrow(mushrooms);
+mushrooms.train_idx <- sample(seq_len(mushrooms.size), size = floor(0.75 * mushrooms.size));
+mushrooms.test_idx <- -mushrooms.train_idx;
+mushrooms.train <- mushrooms[mushrooms.train_idx,];
+mushrooms.test <- mushrooms[mushrooms.test_idx,];
+mushrooms.testclass <- mushrooms.class[mushrooms.test_idx];
+
 
 # Other Configuration ---
 options(max.print = 230);
 
 # Create tree for Mushroom Data ---
-mushrooms.tree <- ctree(Class ~ CS + CC + B + O + GA + GSp + GSi + GC + SS + SR + SSuAR + SSuBr + SCAR + SCBR + VT + VC + RN + RT + SPC + P + H, data = mushrooms.training);
+mushrooms.tree <- tree(Class ~ CS + CC + B + O + GA + GSp + GSi + GC + SS + SR + SSuAR + SSuBr + SCAR + SCBR + VT + VC + RN + RT + SPC + P + H, data = mushrooms.train);
+
+# Plot the tree
 plot(mushrooms.tree);
+text(mushrooms.tree, pretty = 0);
+
+# Check how the model is doing using the test data
+mushrooms.tree.pred <- predict(mushrooms.tree, mushrooms.test, type = 'class');
+mean(mushrooms.tree.pred != mushrooms.testclass);
+
+
+# Perform Cross Validation
+set.seed(123);
