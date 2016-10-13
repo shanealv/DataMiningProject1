@@ -32,8 +32,27 @@ text(mushrooms.tree, pretty = 0);
 
 # Check how the model is doing using the test data
 mushrooms.tree.pred <- predict(mushrooms.tree, mushrooms.test, type = 'class');
-mean(mushrooms.tree.pred != mushrooms.testclass);
 
+PrintStats <- function(actual, pred) {
+    map <- mapply(list, actual, pred, SIMPLIFY = FALSE);
+    TP <- 0; TN <- 0; FP <- 0; FN <- 0;
+    for (pair in map) {
+        if (pair[1] == 2 && pair[2] == 2) {
+            TP <- TP +1;
+        }
+        if (pair[1] == 1 && pair[2] == 1) {
+            TN <- TN +1;
+        }
+        if (pair[1] == 1 && pair[2] == 2) {
+            FP <- FP +1;
+        }
+        if (pair[1] == 2 && pair[2] == 1) {
+            FN <- FN +1;
+        }
+    }
+    cat(TP, TN, FP, FN, sep = " ");
+}
 
+PrintStats(mushrooms.testclass, mushrooms.tree.pred);
 # Perform Cross Validation
 set.seed(123);
