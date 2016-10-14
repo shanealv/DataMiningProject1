@@ -1,1 +1,2 @@
-httpsarchive.ics.uci.edumlmachine-learning-databasesmushroom
+https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/
+https://archive.ics.uci.edu/ml/machine-learning-databases/yeast/

@@ -8,6 +8,3 @@ UsePackage("tree");
 
 # used for svm
 UsePackage("e1071");
-
-# used for createFolds
-UsePackage("caret");

@@ -23,10 +23,12 @@ TrainAndTest <- function(formula, data, alpha, method) {
     train = data[split,];
     test = data[ - split,];
     if (method == 'tree') {
-        model <- tree(formula, data);
+        model <- tree(formula, train);
+        plot(model);
+        text(model);
     }
     else if (method == 'svm') {
-        model <- svm(formula, data, scale = FALSE);
+        model <- svm(formula, train, scale = FALSE);
     }
     pred <- predict(model, test, type = 'class');
     prf <- FindPRF(test[[1]], pred);
@@ -47,10 +49,10 @@ CrossValidate <- function(formula, data, method) {
         all <- rbind(data, test);
         train <- all[!duplicated(all, fromLast = FALSE) & !duplicated(all, fromLast = TRUE),];
         if (method == 'tree') {
-            model <- tree(formula, data);
+            model <- tree(formula, train);
         }
         else if (method == 'svm') {
-            model <- svm(formula, data, scale = FALSE);
+            model <- svm(formula, train, scale = FALSE);
         }
         else return;
         pred <- predict(model, test, type = 'class');
