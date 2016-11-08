@@ -1,18 +1,20 @@
 # Other Configuration ---
-options(max.print = 230);
+#options(max.print = 230);
 
 # Load Data Sets ----
+#https://archive.ics.uci.edu/ml/datasets/Thoracic+Surgery+Data
 surgeries.table <- read.arff("Data/thoraricsurgery.arff");
 surgeries.size <- nrow(surgeries.table);
 surgeries = data.frame(sapply(surgeries.table, c));
-surgeries = within(surgeries, AGEGROUP <- (AGE - AGE %% 10) / 20)
+surgeries = within(surgeries, AGEGROUP <- (AGE - AGE %% 10) / 10)
 surgeries = surgeries[, -16]
 
+#https://www.kaggle.com/uciml/default-of-credit-card-clients-dataset
 creditCards.table <- read.csv("Data/UCI_Credit_Card.csv");
 creditCards.size <- nrow(creditCards.table);
 creditCards <- data.frame(creditCards.table[, -1]);
 creditCards = within(creditCards, NLIMIT_BAL <- LIMIT_BAL / 100000)
-creditCards = within(creditCards, NAGE <- (AGE - AGE %% 10) / 20)
+creditCards = within(creditCards, NAGE <- (AGE - AGE %% 10) / 10)
 creditCards = within(creditCards, BAMT1 <- (BILL_AMT1 - BILL_AMT1 %% 100) / 10000)
 creditCards = within(creditCards, BAMT2 <- (BILL_AMT2 - BILL_AMT2 %% 100) / 10000)
 creditCards = within(creditCards, BAMT3 <- (BILL_AMT3 - BILL_AMT3 %% 100) / 10000)

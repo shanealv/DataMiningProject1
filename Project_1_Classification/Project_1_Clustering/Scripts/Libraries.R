@@ -5,5 +5,5 @@ UsePackage <- function(p) {
 }
 
 UsePackage("foreign");
-UsePackage("fpc");
+UsePackage("stats");
 UsePackage("dbscan");
