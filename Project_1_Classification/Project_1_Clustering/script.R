@@ -9,16 +9,17 @@ surgeries.fit <- hclust(surgeries.dist, method = "ward.D");
 plot(surgeries.fit);
 
 # get 6 clusters
-surgeries.groups.count <- 6;
+surgeries.groups.count <- 8;
 surgeries.groups <- cutree(surgeries.fit, surgeries.groups.count);
 rect.hclust(surgeries.fit, surgeries.groups.count, border = "red");
 
 # print average for all columns for each group
-printaggregatedata(surgeries, surgeries.groups, surgeries.groups.count);
+printaggregatedata(surgeries, surgeries.groups);
+plot(surgeries$AGEGROUP)
 
 ### perform DBSCAN clustering on the surgeries data set----
 kNNdistplot(surgeries, k = 4)
-surgeries.res <- dbscan::dbscan(surgeries, eps = 6, 4)
+surgeries.res <- dbscan::dbscan(surgeries, eps = 1.5, 4)
 unique(surgeries.res$cluster)
 sum(surgeries.res$cluster == 0)
 pairs(surgeries, col = surgeries.res$cluster[surgeries.res$cluster > 0])
@@ -35,7 +36,7 @@ creditCards.fit <- hclust(creditCards.dist, method = "ward.D");
 plot(creditCards.fit);
 
 # get 5 clusters
-creditCards.groups.count <- 10;
+creditCards.groups.count <- 4;
 creditCards.groups <- cutree(creditCards.fit, creditCards.groups.count);
 rect.hclust(creditCards.fit, creditCards.groups.count, border = "red")
 
@@ -43,7 +44,7 @@ printaggregatedata(creditCards.subset, creditCards.groups);
 
 ### perform DBSCAN clustering on the credit defaults data set----
 kNNdistplot(creditCards.subset, k = 3)
-creditCards.res <- dbscan::dbscan(creditCards.subset, 4.5, 3)
+creditCards.res <- dbscan::dbscan(creditCards.subset, 3, 3)
 unique(creditCards.res$cluster)
 sum(creditCards.res$cluster == 0)
 pairs(creditCards.subset, col = creditCards.res$cluster[creditCards.res$cluster > 0])

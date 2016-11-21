@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.25914.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "Project_1_Classification", "Project_1_Classification\Project_1_Classification.rxproj", "{5BDCB338-567A-4BBC-8BBB-BCC3DA8A5823}"
 EndProject
 Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "Project_1_Clustering", "Project_1_Clustering\Project_1_Clustering.rxproj", "{438D39F5-A0E4-468F-9364-D62DE65A3727}"
+EndProject
+Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "Project_1_Association_Rule", "Project_1_Association_Rule\Project_1_Association_Rule.rxproj", "{6A163BF9-2F62-42FD-B37D-EF99C555C297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{438D39F5-A0E4-468F-9364-D62DE65A3727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{438D39F5-A0E4-468F-9364-D62DE65A3727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{438D39F5-A0E4-468F-9364-D62DE65A3727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A163BF9-2F62-42FD-B37D-EF99C555C297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A163BF9-2F62-42FD-B37D-EF99C555C297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A163BF9-2F62-42FD-B37D-EF99C555C297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A163BF9-2F62-42FD-B37D-EF99C555C297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
